@@ -4,11 +4,16 @@ import * as S from './styles';
 import ListTypes from '../ListTypes';
 import ListPokemons from '../ListPokemons';
 
-const AreaAll = ({ pokemons, types }) => {
+import { useAllPokemons, usePokemonsAllType } from '../../utils/config';
+
+const AreaAll = () => {
+  const { pokemons } = useAllPokemons();
+  const { typesPokemon } = usePokemonsAllType();
+
   return (
     <S.Container>
       <S.LeftContainer>
-        <ListTypes types={types} />
+        <ListTypes types={typesPokemon} />
       </S.LeftContainer>
       <S.RightContainer>
         <ListPokemons pokemons={pokemons} />

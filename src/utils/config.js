@@ -4,7 +4,7 @@ const apiAllPokemon = import.meta.env.VITE_API_POKEMON;
 const apiPokemonType = import.meta.env.VITE_API_TYPES;
 
 export const useAllPokemons = () => {
-  const [pokemons, setPokemons] = useState();
+  const [pokemons, setPokemons] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -14,13 +14,15 @@ export const useAllPokemons = () => {
 
       setPokemons(req);
     };
+
     getData();
   }, []);
+
   return { pokemons };
 };
 
 export const usePokemonsAllType = () => {
-  const [typesPokemon, setTypesPokemon] = useState();
+  const [typesPokemon, setTypesPokemon] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
