@@ -8,7 +8,7 @@ const ListPokemons = ({ pokemons }) => {
       <S.Header>{pokemons.length} Pokemons</S.Header>
       <S.Content>
         {pokemons &&
-          pokemons.results.map((pokemon, index) => (
+          pokemons.map((pokemon, index) => (
             <ItemPokemon key={index} name={pokemon.name} idPokemon={index} />
           ))}
       </S.Content>
