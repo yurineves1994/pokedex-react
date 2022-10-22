@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <S.Container>
       <SearchInput />
-      <AreaAll pokemons={pokemons} types={typesPokemon} />
+      <AreaAll pokemons={pokemons} typesPokemon={typesPokemon} />
     </S.Container>
   );
 };

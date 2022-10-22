@@ -1,11 +1,11 @@
 import * as S from './styles';
 
-const ListTypes = ({ types }) => {
+const ListTypes = ({ typesPokemon }) => {
   return (
     <S.Container>
       <ul>
-        {types.results &&
-          types.results.map((type) => (
+        {typesPokemon.results &&
+          typesPokemon.results.map((type) => (
             <li key={type.name}>
               <a href="#">{type.name}</a>
             </li>

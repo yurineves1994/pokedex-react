@@ -9,14 +9,14 @@ export const useAllPokemons = () => {
 
   const endpoints = [];
 
-  for (let i = 1; i < 100; i++) {
+  for (let i = 1; i < 50; i++) {
     endpoints.push(`${apiAllPokemon}${i}`);
   }
 
   const getData = () => {
-    const res = Promise.all(
-      endpoints.map((endpoint) => axios.get(endpoint)),
-    ).then((res) => setPokemons(res.data));
+    Promise.all(endpoints.map((endpoint) => axios.get(endpoint)))
+      .then((res) => setPokemons(res))
+      .catch((e) => console.log(e));
   };
 
   useEffect(() => {
@@ -30,9 +30,7 @@ export const usePokemonsAllType = () => {
   const [typesPokemon, setTypesPokemon] = useState([]);
 
   const getData = async () => {
-    const res = axios
-      .get(apiPokemonType)
-      .then((res) => setTypesPokemon(res.data));
+    axios.get(apiPokemonType).then((res) => setTypesPokemon(res.data));
   };
 
   useEffect(() => {

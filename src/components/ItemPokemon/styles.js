@@ -33,6 +33,7 @@ export const PokemonImage = styled.div`
     img {
       max-width: 55%;
       max-height: 200px;
+      width: 45%;
     }
 
     &::before {
