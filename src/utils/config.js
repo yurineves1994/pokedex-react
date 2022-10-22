@@ -39,3 +39,27 @@ export const usePokemonsAllType = () => {
 
   return { typesPokemon };
 };
+
+export const usePokemonsForType = () => {
+  const [pokemonsType, setPokemonsType] = useState();
+
+  async function setUsePokemonsForType(urlType, e) {
+    e.preventDefault();
+    const res = await fetch(urlType);
+    let pokemonsForType = await res.json();
+
+    const endpoints = [];
+
+    pokemonsForType.pokemon.forEach((element) => {
+      endpoints.push(element.pokemon.url);
+    });
+
+    pokemonsForType = await Promise.all(
+      endpoints.map((endpoint) => axios.get(endpoint)),
+    )
+      .then((res) => setPokemonsType(res))
+      .catch((e) => console.log(e));
+  }
+
+  return { pokemonsType, setUsePokemonsForType };
+};
