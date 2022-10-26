@@ -18,3 +18,21 @@ export const RightContainer = styled.div`
     padding-left: 50px;
     padding-bottom: 20px;
 `;
+
+export const Button = styled.a`
+    border: 0;
+    background-color: rgba(63,93,179,0.1);
+    width: 19.6rem;
+    line-height: 4.5rem;
+    display: block;
+    margin: 0 auto;
+    margin-top: 6.8rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-align: center;
+    letter-spacing: -0.01em;
+    color: #3F5DB3;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+`;

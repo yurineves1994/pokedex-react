@@ -2,12 +2,14 @@ import * as S from './styles';
 
 import ItemPokemon from '../ItemPokemon';
 
-const ListPokemons = ({ pokemons }) => {
+const ListPokemons = ({ pokemons = [], pokemonSearch = null }) => {
+  console.log(pokemons);
+  console.log(pokemonSearch);
   return (
     <>
-      <S.Header>{pokemons.length} Pokemons</S.Header>
+      {pokemonSearch == null && <S.Header>{pokemons.length} Pokemons</S.Header>}
       <S.Content>
-        {pokemons &&
+        {pokemons && pokemonSearch === null ? (
           pokemons.map((pokemon, index) => (
             <ItemPokemon
               key={index}
@@ -15,9 +17,15 @@ const ListPokemons = ({ pokemons }) => {
               name={pokemon.data.name}
               idPokemon={index}
             />
-          ))}
+          ))
+        ) : (
+          <ItemPokemon
+            image={pokemonSearch.sprites.back_default}
+            name={pokemonSearch.name}
+            idPokemon={pokemonSearch.id}
+          />
+        )}
       </S.Content>
-      <S.Button>Carregar mais</S.Button>
     </>
   );
 };

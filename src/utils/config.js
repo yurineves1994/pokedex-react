@@ -5,11 +5,11 @@ const apiAllPokemon = import.meta.env.VITE_API_POKEMON;
 const apiPokemonType = import.meta.env.VITE_API_TYPES;
 
 export const useAllPokemons = () => {
-  const [pokemons, setPokemons] = useState([]);
+  const [pokemonsAll, setPokemons] = useState([]);
 
   const endpoints = [];
 
-  for (let i = 1; i < 50; i++) {
+  for (let i = 1; i < 200; i++) {
     endpoints.push(`${apiAllPokemon}${i}`);
   }
 
@@ -23,7 +23,22 @@ export const useAllPokemons = () => {
     getData();
   }, []);
 
-  return { pokemons };
+  return { pokemonsAll };
+};
+
+export const usePokemonSearch = () => {
+  const [pokemonSearch, setPokemonSearch] = useState();
+
+  async function setUsePokemonsForSearch(searchName, e) {
+    e.preventDefault();
+
+    const res = await fetch(`${apiAllPokemon}${searchName}`);
+    let pokemonsForSearch = await res.json();
+
+    setPokemonSearch(pokemonsForSearch);
+  }
+
+  return { pokemonSearch, setUsePokemonsForSearch };
 };
 
 export const usePokemonsAllType = () => {
@@ -63,3 +78,24 @@ export const usePokemonsForType = () => {
 
   return { pokemonsType, setUsePokemonsForType };
 };
+
+/*export const usePokemons = () => {
+  const [pokemons, setPokemons] = useState();
+
+  function setUsePokemons(pokemons = [], inicial = 1, final = 50) {
+    const endpoints = [];
+
+    for (let i = inicial; i < final; i++) {
+      endpoints.push(`${apiAllPokemon}${i}`);
+    }
+
+    const getData = () => {
+      Promise.all(endpoints.map((endpoint) => axios.get(endpoint)))
+        .then((res) => setPokemons(res))
+        .catch((e) => console.log(e));
+    };
+
+    getData();
+  }
+  return { pokemons, setUsePokemons };
+};*/

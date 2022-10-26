@@ -1,14 +1,12 @@
 import * as S from './styles';
-import axios from 'axios';
 
 // components
 import ListTypes from '../ListTypes';
 import ListPokemons from '../ListPokemons';
-import { useState } from 'react';
 
 import { usePokemonsForType } from '../../utils/config';
 
-const AreaAll = ({ pokemons, typesPokemon }) => {
+const AreaAll = ({ pokemonsAll, typesPokemon, pokemonSearched }) => {
   const { pokemonsType, setUsePokemonsForType } = usePokemonsForType();
 
   return (
@@ -20,8 +18,19 @@ const AreaAll = ({ pokemons, typesPokemon }) => {
         />
       </S.LeftContainer>
       <S.RightContainer>
-        {pokemonsType && <ListPokemons pokemons={pokemonsType} />}
-        {!pokemonsType && <ListPokemons pokemons={pokemons} />}
+        {!pokemonSearched && pokemonsType ? (
+          <ListPokemons pokemons={pokemonsType} pokemonSearch />
+        ) : (
+          ''
+        )}
+        {!pokemonSearched && !pokemonsType ? (
+          <ListPokemons pokemons={pokemonsAll} />
+        ) : (
+          ''
+        )}
+        {pokemonSearched && (
+          <ListPokemons pokemons={null} pokemonSearch={pokemonSearched} />
+        )}
       </S.RightContainer>
     </S.Container>
   );

@@ -15,7 +15,7 @@ export const SeachTitle = styled.h2`
     color: #2F3133;
 `;
 
-export const SeachInput = styled.div`
+export const SeachInput = styled.form`
   display: flex;
   flex: 1;
   max-width: 400px;
