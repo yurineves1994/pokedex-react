@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Home from './pages/Home';
-import { GlobalStyle } from './styles/global';
+import App from './pages/Home';
+import { PokemonsProvider } from './context/ContextPokemons';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <GlobalStyle />
-    <Home />
+    <PokemonsProvider>
+      <App />
+    </PokemonsProvider>
   </React.StrictMode>,
 );

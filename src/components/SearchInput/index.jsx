@@ -1,8 +1,20 @@
 import { useState } from 'react';
 import * as S from './styles';
 
-const SearchInput = ({ handleSearch }) => {
+import { useContext } from 'react';
+import { PokemonsContext } from '../../context/ContextPokemons/context';
+import { pokemonForName } from '../../context/ContextPokemons/actions';
+
+const SearchInput = () => {
   const [searchValue, setSearchValue] = useState();
+
+  const { pokemonsDispatch } = useContext(PokemonsContext);
+
+  const handleSearch = (searchValue, e) => {
+    e.preventDefault();
+
+    pokemonForName(searchValue, pokemonsDispatch);
+  };
 
   return (
     <S.SeachContainer>

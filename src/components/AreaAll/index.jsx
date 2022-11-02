@@ -4,33 +4,29 @@ import * as S from './styles';
 import ListTypes from '../ListTypes';
 import ListPokemons from '../ListPokemons';
 
-import { usePokemonsForType } from '../../utils/config';
+import { useContext, useEffect } from 'react';
+import { PokemonsContext } from '../../context/ContextPokemons/context';
+import { allPokemonsAndAllTypes } from '../../context/ContextPokemons/actions';
 
-const AreaAll = ({ pokemonsAll, typesPokemon, pokemonSearched }) => {
-  const { pokemonsType, setUsePokemonsForType } = usePokemonsForType();
+const AreaAll = () => {
+  const { pokemons, typesPokemons, pokemonsDispatch } =
+    useContext(PokemonsContext);
 
+  useEffect(() => {
+    allPokemonsAndAllTypes(pokemonsDispatch);
+  }, [pokemonsDispatch]);
+
+  const handleReset = () => {
+    allPokemonsAndAllTypes(pokemonsDispatch);
+  };
   return (
     <S.Container>
       <S.LeftContainer>
-        <ListTypes
-          typesPokemon={typesPokemon}
-          handleGetForType={setUsePokemonsForType}
-        />
+        <ListTypes types={typesPokemons} />
       </S.LeftContainer>
       <S.RightContainer>
-        {!pokemonSearched && pokemonsType ? (
-          <ListPokemons pokemons={pokemonsType} pokemonSearch />
-        ) : (
-          ''
-        )}
-        {!pokemonSearched && !pokemonsType ? (
-          <ListPokemons pokemons={pokemonsAll} />
-        ) : (
-          ''
-        )}
-        {pokemonSearched && (
-          <ListPokemons pokemons={null} pokemonSearch={pokemonSearched} />
-        )}
+        <ListPokemons pokemons={pokemons} />
+        <S.Button onClick={handleReset}>Voltar</S.Button>
       </S.RightContainer>
     </S.Container>
   );
